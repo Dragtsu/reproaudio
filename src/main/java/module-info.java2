@@ -1,0 +1,14 @@
+module com.player.reproaudio {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires static lombok;
+    requires spring.beans;
+    requires spring.context;
+    requires atlantafx.base;
+    requires spring.boot;
+    requires spring.boot.autoconfigure;
+    requires org.slf4j;
+
+    opens com.player.reproaudio to javafx.fxml;
+    exports com.player.reproaudio;
+}

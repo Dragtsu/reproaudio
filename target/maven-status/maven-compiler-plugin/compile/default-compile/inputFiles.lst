@@ -1,4 +1,5 @@
-/home/dragneel/Desarrollos/ReproAudio/reproaudio/src/main/java/com/player/reproaudio/PrimaryController.java
-/home/dragneel/Desarrollos/ReproAudio/reproaudio/src/main/java/module-info.java
-/home/dragneel/Desarrollos/ReproAudio/reproaudio/src/main/java/com/player/reproaudio/App.java
-/home/dragneel/Desarrollos/ReproAudio/reproaudio/src/main/java/com/player/reproaudio/SecondaryController.java
+D:\Desarrollos\reproaudio\src\main\java\com\player\reproaudio\controller\CommonController.java
+D:\Desarrollos\reproaudio\src\main\java\com\player\reproaudio\MainApplication.java
+D:\Desarrollos\reproaudio\src\main\java\com\player\reproaudio\utils\SingletonViews.java
+D:\Desarrollos\reproaudio\src\main\java\com\player\reproaudio\Launcher.java
+D:\Desarrollos\reproaudio\src\main\java\com\player\reproaudio\utils\EnumVistas.java

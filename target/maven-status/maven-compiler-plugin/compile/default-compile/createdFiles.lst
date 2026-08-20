@@ -1,4 +1,5 @@
-com/player/reproaudio/App.class
-com/player/reproaudio/PrimaryController.class
-com/player/reproaudio/SecondaryController.class
-module-info.class
+com\player\reproaudio\MainApplication.class
+com\player\reproaudio\controller\CommonController.class
+com\player\reproaudio\utils\SingletonViews.class
+com\player\reproaudio\utils\EnumVistas.class
+com\player\reproaudio\Launcher.class
