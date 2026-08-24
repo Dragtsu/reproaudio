@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<BorderPane styleClass="aero-window" stylesheets="@aero-styles.css,@office2010.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" >
+<BorderPane styleClass="aero-window" stylesheets="@aero-styles.css,@office2010.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.player.reproaudio.controller.MainController">
    <top>
       <VBox>
          <children>
@@ -30,12 +31,12 @@
                   <Region HBox.hgrow="ALWAYS" />
 
                   <!-- ============== WINDOW BUTTONS ============== -->
-                  <Button fx:id="btnMinimizeWindow" focusTraversable="false" styleClass="aero-btn, aero-btn-min">
+                  <Button fx:id="btnMinimizeWindow" focusTraversable="false" onAction="#minimizarVentana" styleClass="aero-btn, aero-btn-min">
                      <graphic>
                         <SVGPath content="M1 7 L13 7" scaleX="0.7" scaleY="0.7" styleClass="aero-glyph" />
                      </graphic>
                   </Button>
-                  <Button fx:id="btnCloseWindow" focusTraversable="false" styleClass="aero-btn, aero-btn-close">
+                  <Button fx:id="btnCloseWindow" focusTraversable="false" onAction="#cerrarAplicacion" styleClass="aero-btn, aero-btn-close">
                      <graphic>
                         <SVGPath content="M2 2 L12 12 M12 2 L2 12" scaleX="0.7" scaleY="0.7" styleClass="aero-glyph" />
                      </graphic>
@@ -44,30 +45,30 @@
             </VBox>
             <TabPane styleClass="office-ribbon" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Registros">
+                <Tab text="Audio">
                         <HBox spacing="4.0" styleClass="ribbon-group,ribbon-content">
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnVenta" mnemonicParsing="false"  styleClass="ribbon-button-large" text="Ingreso" />
+                              <Button fx:id="btnCrearAudio" mnemonicParsing="false" styleClass="ribbon-button-large" onAction="#mostrarCrearAudio" text="Generar" />
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnVenta3" mnemonicParsing="false"  styleClass="ribbon-button-large" text="Produccion" />
+                              <Button fx:id="btnVenta3" mnemonicParsing="false" styleClass="ribbon-button-large" text="Produccion" />
                               <Separator orientation="VERTICAL" />
 
                         </HBox>
                   </Tab>
                 <Tab closable="false" text="Catálogos">
                      <content>
-                        <HBox styleClass="ribbon-group,ribbon-content"  spacing="4.0">
+                        <HBox spacing="4.0" styleClass="ribbon-group,ribbon-content">
                            <children>
                               <Separator orientation="VERTICAL" />
                               <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Obras" />
                               <Separator orientation="VERTICAL" />
-                              <Button mnemonicParsing="false"  styleClass="ribbon-button-large" text="Productos" />
+                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Productos" />
                               <Separator orientation="VERTICAL" />
                               <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Clientes" />
                               <Separator orientation="VERTICAL" />
-                              <Button mnemonicParsing="false"  styleClass="ribbon-button-large" text="Vendedor" />
+                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Vendedor" />
                               <Separator orientation="VERTICAL" />
-                              <Button mnemonicParsing="false"  styleClass="ribbon-button-large" text="Oficina" />
+                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Oficina" />
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -77,22 +78,22 @@
                 </Tab>
                   <Tab text="Auxiliares">
                      <content>
-                        <HBox styleClass="ribbon-group,ribbon-content"  spacing="4.0">
+                        <HBox spacing="4.0" styleClass="ribbon-group,ribbon-content">
                            <children>
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnVenta1" mnemonicParsing="false"  styleClass="ribbon-button-large" text="Cliente" />
+                              <Button fx:id="btnVenta1" mnemonicParsing="false" styleClass="ribbon-button-large" text="Cliente" />
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnVenta11" mnemonicParsing="false"  styleClass="ribbon-button-large" text="Vendedor" />
+                              <Button fx:id="btnVenta11" mnemonicParsing="false" styleClass="ribbon-button-large" text="Vendedor" />
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnVenta12" mnemonicParsing="false"  styleClass="ribbon-button-large" text="Producción" />
+                              <Button fx:id="btnVenta12" mnemonicParsing="false" styleClass="ribbon-button-large" text="Producción" />
                               <Separator orientation="VERTICAL" />
                               <Button fx:id="btnVenta13" mnemonicParsing="false" styleClass="ribbon-button-large" text="Producción de día" />
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnVenta14" mnemonicParsing="false"  styleClass="ribbon-button-large" text="Ingreso" />
+                              <Button fx:id="btnVenta14" mnemonicParsing="false" styleClass="ribbon-button-large" text="Ingreso" />
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnVenta15" mnemonicParsing="false"  styleClass="ribbon-button-large" text="Facturacion" />
+                              <Button fx:id="btnVenta15" mnemonicParsing="false" styleClass="ribbon-button-large" text="Facturacion" />
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnVenta16" mnemonicParsing="false"  styleClass="ribbon-button-large" text="Recibo" />
+                              <Button fx:id="btnVenta16" mnemonicParsing="false" styleClass="ribbon-button-large" text="Recibo" />
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" top="5.0" />
@@ -102,10 +103,10 @@
                   </Tab>
                   <Tab text="Usuarios">
                      <content>
-                        <HBox styleClass="ribbon-group,ribbon-content"  spacing="4.0">
+                        <HBox spacing="4.0" styleClass="ribbon-group,ribbon-content">
                            <children>
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnVenta2" mnemonicParsing="false"  styleClass="ribbon-button-large" text="Permiso de usuarios" />
+                              <Button fx:id="btnVenta2" mnemonicParsing="false" styleClass="ribbon-button-large" text="Permiso de usuarios" />
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" top="5.0" />

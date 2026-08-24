@@ -1,5 +1,10 @@
+com\player\reproaudio\controller\MainController.class
+com\player\reproaudio\utils\GeneracionAudio$Timestamp.class
+com\player\reproaudio\controller\CreaAudioController.class
+com\player\reproaudio\Launcher.class
 com\player\reproaudio\MainApplication.class
 com\player\reproaudio\controller\CommonController.class
 com\player\reproaudio\utils\SingletonViews.class
+com\player\reproaudio\utils\GeneracionAudio$GenerationResult.class
 com\player\reproaudio\utils\EnumVistas.class
-com\player\reproaudio\Launcher.class
+com\player\reproaudio\utils\GeneracionAudio.class

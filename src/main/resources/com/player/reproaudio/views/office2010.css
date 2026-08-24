@@ -104,8 +104,8 @@
     -fx-alignment: CENTER;
     -fx-wrap-text: false;
     -fx-text-alignment: CENTER;
-    -fx-pref-width: USE_COMPUTED_SIZE;
-    -fx-min-width: USE_PREF_SIZE;
+    -fx-min-width: -1;
+    -fx-min-height: -1;
 }
 
 .ribbon-button-small {
