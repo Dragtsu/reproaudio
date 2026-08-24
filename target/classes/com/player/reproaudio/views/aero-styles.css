@@ -1,0 +1,169 @@
+/* ============================================================
+   Windows 7 Aero — JavaFX CSS
+   - Frosted-glass title bar with the iconic blue gradient
+   - White inner highlight (the "glass line")
+   - Soft blue border that matches the chrome
+   - Red glow on the close button hover (the signature Aero move)
+   ============================================================ */
+
+/* ---------- Root window ---------- */
+.aero-window {
+    -fx-font-family: "Segoe UI", "Tahoma", "Verdana", sans-serif;
+    -fx-font-size: 12px;
+    -fx-background-color:
+        linear-gradient(to bottom,
+            #eaf4fc 0%,
+            #d8ebf8 60%,
+            #c4dff4 100%);
+    -fx-background-radius: 6;
+    -fx-border-color: rgba(70, 130, 190, 0.55);
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(20, 50, 90, 0.35), 14, 0, 0, 4);
+}
+
+/* ---------- Title bar wrapper ---------- */
+.aero-titlebar-wrap {
+    -fx-background-radius: 6 6 0 0;
+    -fx-border-color:
+        rgba(255, 255, 255, 0.65)            /* top white highlight */
+        transparent
+        rgba(20, 60, 120, 0.18)              /* bottom dark line */
+        transparent;
+    -fx-border-width: 1 0 1 0;
+    -fx-border-insets: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+    -fx-clip: null;
+}
+
+/* The 1px white line at the very top of the bar (the "glass" effect) */
+.aero-titlebar-highlight {
+    -fx-background-color: linear-gradient(to right,
+        rgba(255, 255, 255, 0.0) 0%,
+        rgba(255, 255, 255, 0.95) 30%,
+        rgba(255, 255, 255, 0.95) 70%,
+        rgba(255, 255, 255, 0.0) 100%);
+    -fx-pref-height: 1;
+    -fx-min-height: 1;
+    -fx-max-height: 1;
+}
+
+/* ---------- Title bar (the famous Aero blue gradient) ---------- */
+.aero-titlebar {
+    -fx-background-color: linear-gradient(to bottom,
+        #d8ebf8 0%,     /* almost-white top */
+        #cae3f4 12%,
+        #b5d6ee 38%,
+        #9bc7e7 72%,
+        #8cbae0 100%);
+    -fx-padding: 0 2 0 8;
+    -fx-spacing: 4;
+    -fx-alignment: CENTER_LEFT;
+    -fx-min-height: 30;
+    -fx-pref-height: 30;
+}
+
+/* ---------- App icon (the little 16x16 square) ---------- */
+.aero-icon {
+    -fx-fill: linear-gradient(to bottom, #1b4f8c 0%, #0d2c52 100%);
+    -fx-stroke: rgba(20, 50, 100, 0.55);
+    -fx-stroke-width: 0.6;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.7), 1, 0, 0, 1);
+}
+
+/* ---------- Title text ---------- */
+.aero-title {
+    -fx-text-fill: #0a2547;
+    -fx-font-size: 12px;
+    -fx-font-weight: 500;
+    -fx-padding: 0 6 0 6;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.85), 0, 0, 0, 1);
+}
+
+/* ---------- Glyphs (the actual min/max/close shapes) ---------- */
+.aero-glyph {
+    -fx-stroke: #0a2547;
+    -fx-stroke-width: 1.2;
+    -fx-fill: transparent;
+    -fx-stroke-line-cap: round;
+}
+
+/* ---------- Base window button ---------- */
+.aero-btn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-pref-width: 45;
+    -fx-pref-height: 30;
+    -fx-min-width: 45;
+    -fx-min-height: 30;
+    -fx-max-width: 45;
+    -fx-max-height: 30;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+    -fx-content-display: graphic-only;
+    -fx-alignment: CENTER;
+}
+
+/* Hover for min & max — soft glassy highlight */
+.aero-btn-min:hover,
+.aero-btn-max:hover {
+    -fx-background-color: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(225, 240, 253, 0.40) 50%,
+        rgba(190, 218, 244, 0.25) 100%);
+    -fx-border-color:
+        rgba(255, 255, 255, 0.85) rgba(80, 130, 190, 0.05)
+        rgba(80, 130, 190, 0.40) rgba(80, 130, 190, 0.05);
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.8), 0, 0, 0, 1);
+}
+
+/* Pressed state for min & max — pushed-in look */
+.aero-btn-min:pressed,
+.aero-btn-max:pressed {
+    -fx-background-color: linear-gradient(to bottom,
+        rgba(140, 185, 225, 0.55) 0%,
+        rgba(180, 215, 245, 0.55) 100%);
+    -fx-border-color:
+        rgba(80, 130, 190, 0.40) rgba(255, 255, 255, 0.20)
+        rgba(255, 255, 255, 0.10) rgba(80, 130, 190, 0.40);
+    -fx-border-width: 1;
+}
+
+/* ---------- Close button — the iconic red on hover ---------- */
+.aero-btn-close:hover {
+    -fx-background-color: linear-gradient(to bottom,
+        #f29ba1 0%,
+        #ed5565 45%,
+        #e81123 100%);
+    -fx-effect:
+        innershadow(gaussian, rgba(255, 255, 255, 0.45), 1, 0, 0, 1),
+        dropshadow(gaussian, rgba(232, 17, 35, 0.55), 10, 0, 0, 0);
+}
+.aero-btn-close:hover .aero-glyph {
+    -fx-stroke: #ffffff;
+}
+.aero-btn-close:pressed {
+    -fx-background-color: linear-gradient(to bottom, #b40e1c 0%, #9c0c18 100%);
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.35), 3, 0, 0, 1);
+}
+.aero-btn-close:pressed .aero-glyph {
+    -fx-stroke: #ffe5e8;
+}
+
+/* ---------- Content area ---------- */
+.aero-content {
+    -fx-background-color: #f3f6fa;
+    -fx-background-radius: 0 0 6 6;
+    -fx-border-color: rgba(70, 130, 190, 0.20);
+    -fx-border-width: 1 0 0 0;
+}
+
+.aero-content-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #0a2547;
+}

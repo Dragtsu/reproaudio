@@ -1,0 +1,158 @@
+/* ============================================================
+   Estilo tipo "Office 2010" para el TabPane / Ribbon en JavaFX
+   ============================================================ */
+
+.root {
+    -fx-font-family: "Segoe UI", "Calibri", sans-serif;
+    -fx-font-size: 11px;
+}
+
+/* ---------- TabPane general ---------- */
+.office-ribbon {
+    -fx-tab-min-height: 24px;
+    -fx-tab-max-height: 24px;
+}
+
+.office-ribbon .tab-header-area {
+    -fx-padding: 0 0 0 6;
+    -fx-background-color: linear-gradient(to bottom, #f4f8fc, #dbeaf7);
+    -fx-border-color: transparent transparent #a9c6e0 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.office-ribbon .tab-header-area .tab-header-background {
+    -fx-background-color: linear-gradient(to bottom, #f4f8fc, #dbeaf7);
+}
+
+.office-ribbon .tab {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 4 10 4 10;
+    -fx-background-radius: 0;
+}
+
+.office-ribbon .tab .tab-label {
+    -fx-text-fill: #1f4e79;
+    -fx-font-size: 11px;
+}
+
+.office-ribbon .tab:selected {
+    -fx-background-color: white;
+    -fx-border-color: #a9c6e0 #a9c6e0 white #a9c6e0;
+    -fx-border-width: 1 1 1 1;
+}
+
+.office-ribbon .tab:selected .tab-label {
+    -fx-text-fill: #185abd;
+    -fx-font-weight: bold;
+}
+
+.office-ribbon .tab:hover {
+    -fx-background-color: #cfe4f7;
+}
+
+/* ---------- Contenido del ribbon (dentro de cada Tab) ---------- */
+.ribbon-content {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #a9c6e0 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 4 6 4 6;
+    -fx-spacing: 6;
+    -fx-alignment: TOP_LEFT;
+}
+
+/* ---------- Grupos (ej: Portapapeles, Fuente, Párrafo) ---------- */
+.ribbon-group {
+    -fx-padding: 2 8 2 8;
+    -fx-spacing: 2;
+    -fx-alignment: TOP_LEFT;
+}
+
+.ribbon-group-label {
+    -fx-font-size: 10px;
+    -fx-text-fill: #5b6b78;
+    -fx-alignment: CENTER;
+    -fx-padding: 4 0 0 0;
+}
+
+/* ---------- Separadores verticales entre grupos ---------- */
+.ribbon-content > .separator {
+    -fx-padding: 2 4 2 4;
+}
+.ribbon-content > .separator .line {
+    -fx-border-color: #d3dfe8;
+    -fx-border-width: 0 1 0 0;
+}
+
+/* ---------- Botones estilo Office ---------- */
+.ribbon-button-large,
+.ribbon-button-small,
+.ribbon-button-icon {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-text-fill: #1f1f1f;
+    -fx-cursor: hand;
+}
+
+.ribbon-button-large {
+    -fx-content-display: TOP;
+    -fx-padding: 4 10 4 10;
+    -fx-pref-height: 58px;
+    -fx-font-size: 11px;
+    -fx-alignment: CENTER;
+    -fx-wrap-text: false;
+    -fx-text-alignment: CENTER;
+    -fx-min-width: -1;
+    -fx-min-height: -1;
+}
+
+.ribbon-button-small {
+    -fx-padding: 2 6 2 6;
+    -fx-font-size: 11px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.ribbon-button-icon {
+    -fx-padding: 3 6 3 6;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-min-width: 24px;
+}
+
+/* Hover: recuadro azul claro típico de Office */
+.ribbon-button-large:hover,
+.ribbon-button-small:hover,
+.ribbon-button-icon:hover {
+    -fx-background-color: linear-gradient(to bottom, #fdf3d0, #fbe19a);
+    -fx-border-color: #e0ac47;
+    -fx-border-width: 1;
+}
+
+/* Presionado */
+.ribbon-button-large:pressed,
+.ribbon-button-small:pressed,
+.ribbon-button-icon:pressed {
+    -fx-background-color: linear-gradient(to bottom, #f4d590, #eec86a);
+    -fx-border-color: #c98e2e;
+    -fx-border-width: 1;
+}
+
+/* ---------- ComboBox (Fuente / Tamaño) ---------- */
+.combo-box {
+    -fx-font-size: 11px;
+    -fx-background-radius: 2;
+    -fx-border-color: #b9c7d3;
+    -fx-border-radius: 2;
+}
+
+/* ---------- Área de documento (solo para previsualizar) ---------- */
+.document-area {
+    -fx-background-color: #e9eef3;
+}
+
+.placeholder-label {
+    -fx-text-fill: #9aa7b0;
+    -fx-font-size: 13px;
+}
