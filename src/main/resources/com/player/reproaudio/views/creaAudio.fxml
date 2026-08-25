@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -14,6 +15,15 @@
          <children>
             <Label text="Ingrese el texto:" />
             <TextArea fx:id="txtTexto" maxHeight="200.0" maxWidth="500.0" />
+            <HBox fillHeight="false" spacing="5.0">
+               <children>
+                  <Label fx:id="timeLabel" text="00:00" HBox.hgrow="NEVER" />
+                  <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" progress="0.0" HBox.hgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
             <HBox spacing="5.0" VBox.vgrow="ALWAYS">
                <children>
                   <Button mnemonicParsing="false">
@@ -38,7 +48,7 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets left="10.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
             <HBox alignment="BOTTOM_LEFT" spacing="5.0">
@@ -60,10 +70,13 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
          </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
       </VBox>
 
    </children>
