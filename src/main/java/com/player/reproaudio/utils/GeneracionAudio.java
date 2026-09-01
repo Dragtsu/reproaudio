@@ -5,11 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.player.reproaudio.controller.CreaAudioController;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +21,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -35,6 +36,10 @@ public class GeneracionAudio {
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final String KOKORO_URL = "http://localhost:8880/dev/captioned_speech";
 
+
+    @FXML
+    private ProgressBar progressBar;
+    @FXML private Label timeLabel;
 
     private MediaPlayer mediaPlayer;
     private List<Timestamp> timestamps = new ArrayList<>();
@@ -52,13 +57,12 @@ public class GeneracionAudio {
     private Media audioMedia;
     private String currentText = "";
 
-
     public void generarAudio( String text ){
+
+
 
         new Thread(() -> {
             try {
-
-
 
                 GenerationResult result = generateSpeech(text, DEFAULT_VOICE, "mp3", speed);
                 log.info("Audio generado");
@@ -88,8 +92,14 @@ public class GeneracionAudio {
                     //audioFilePath = audioDir.resolve(fileName);
                     //Files.write(audioFilePath, currentAudioBytes);
                     Files.write(tempFile, currentAudioBytes);
-                    tempFile.toFile().deleteOnExit();
+                    //tempFile.toFile().deleteOnExit();
                     audioMedia = new Media(tempFile.toUri().toString());
+
+                    List<Timestamp> timeStamps = result.timestamps;
+
+                    for(int i=0;i<timeStamps.size();i++){
+                        log.info(timeStamps.get(i).word+"  --  "+timeStamps.get(i).startTime+"  --  "+timeStamps.get(i).endTime);
+                    }
 
                     Platform.runLater(() -> {
                        // displayTextWithHighlight(text, timestamps);
@@ -97,7 +107,7 @@ public class GeneracionAudio {
 
                     });
                 } else {
-
+                    log.info("Result es null");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -121,10 +131,11 @@ public class GeneracionAudio {
             mediaPlayer = new MediaPlayer(audioMedia);
             mediaPlayer.setRate(speed);
 
+            log.info("EN setOn ready");
             mediaPlayer.setOnReady(() -> {
                 Duration totalDuration = mediaPlayer.getMedia().getDuration();
                 if (totalDuration != null && totalDuration.toSeconds() > 0) {
-                   // updateTimeLabel(Duration.ZERO, totalDuration);
+                    updateTimeLabel(Duration.ZERO, totalDuration);
                 }
             });
 
@@ -133,10 +144,9 @@ public class GeneracionAudio {
                     Duration total = mediaPlayer.getMedia().getDuration();
                     if (total != null && total.toSeconds() > 0) {
                         double progress = newVal.toSeconds() / total.toSeconds();
-                        //progressBar.setProgress(progress);
-
+                        progressBar.setProgress(progress);
+                        updateTimeLabel(newVal, total);
                     }
-
                 }
             });
 
@@ -149,6 +159,7 @@ public class GeneracionAudio {
                 });
             });
 
+            log.info("To Play");
             mediaPlayer.play();
 
         } catch (Exception e) {
@@ -211,7 +222,7 @@ public class GeneracionAudio {
         return new GenerationResult(audioBytes, timestamps);
     }
 
-    public  class Timestamp {
+    public static class Timestamp {
         public String word;
         public double startTime;
         public double endTime;
@@ -237,4 +248,22 @@ public class GeneracionAudio {
             this.timestamps = timestamps;
         }
     }
+
+    private void updateTimeLabel(Duration current, Duration total) {
+        Platform.runLater(() -> {
+            String currentStr = formatTime(current);
+            String totalStr = formatTime(total);
+            timeLabel.setText(currentStr + " / " + totalStr);
+        });
+    }
+
+    private String formatTime(Duration duration) {
+        if (duration == null || duration.toSeconds() < 0) return "0:00";
+        int seconds = (int) duration.toSeconds();
+        int minutes = seconds / 60;
+        int secs = seconds % 60;
+        return String.format("%d:%02d", minutes, secs);
+    }
+
+
 }
