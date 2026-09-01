@@ -27,6 +27,12 @@ public class MainController {
     public void mostrarCrearAudio(){
         mostrarVistaPanelPrincipal(EnumVistas.CREAAUDIO);
     }
+    
+    @FXML
+    public void crearActividad(){
+        System.out.println("CARGAR VISTA ACTIVIDAD");
+        mostrarVistaPanelPrincipal(EnumVistas.REGISTRAACTIVIDAD);
+    }
 
     @FXML
     private void minimizarVentana(ActionEvent event) {

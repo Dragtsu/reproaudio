@@ -60,15 +60,8 @@
                         <HBox spacing="4.0" styleClass="ribbon-group,ribbon-content">
                            <children>
                               <Separator orientation="VERTICAL" />
-                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Obras" />
-                              <Separator orientation="VERTICAL" />
-                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Productos" />
-                              <Separator orientation="VERTICAL" />
-                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Clientes" />
-                              <Separator orientation="VERTICAL" />
-                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Vendedor" />
-                              <Separator orientation="VERTICAL" />
-                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" text="Oficina" />
+                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" onAction="#crearActividad" text="Actividad" />
+                              <Separator orientation="VERTICAL" />                          
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

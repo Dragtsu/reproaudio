@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.player.reproaudio.controller.ParcialActividadController">
+   <children>
+      <VBox spacing="10.0">
+         <children>
+            <VBox spacing="5.0">
+               <children>
+                  <Label text="Id:" />
+                  <TextField fx:id="txtIdParcialActividad" editable="false" />
+                  <Label text="Parcial:" />
+                  <TextField fx:id="txtParcial" />
+                  <Label text="Actividad:" />
+                  <TextField fx:id="txtActividad" />
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </VBox>
+            <HBox alignment="BOTTOM_LEFT" spacing="5.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#guardar" styleClass="accent" text="Guardar">
+                     <graphic>
+                        <FontIcon iconLiteral="mdmz-save" />
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#limpiar" styleClass="accent" text="Limpiar">
+                     <graphic>
+                        <FontIcon iconLiteral="mdal-cleaning_services" />
+                     </graphic>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="vBoxContainer" minWidth="700.0" spacing="5.0" HBox.hgrow="ALWAYS">
+            <children>
+               <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                  <children>
+                     <Label text="Registros a mostrar: " />
+                     <ChoiceBox fx:id="choiceNumRegistros" prefWidth="50.0" />
+                  <Label fx:id="lblCount" text=" de 0" />
+                  </children>
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets right="5.0" />
+               </padding>
+               </HBox>
+               <TableView fx:id="tablaParcialActividad" VBox.vgrow="ALWAYS">
+                 <columns>
+                  <TableColumn fx:id="idColumn" editable="false" maxWidth="-1.0" minWidth="40.0" prefWidth="-1.0" sortable="false" text="Id " />
+                  <TableColumn fx:id="parcialColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="-1.0" sortable="false" text="Parcial" />
+                  <TableColumn fx:id="actividadColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" sortable="false" text="Actividad" />
+                 </columns>
+               <styleClass>
+                  <String fx:value="striped" />
+                  <String fx:value="select-rows" />
+               </styleClass>
+               </TableView>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </VBox.margin>
+                    <HBox alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.valignment="CENTER">
+                        <GridPane.margin>
+                            <Insets right="5.0" />
+                        </GridPane.margin>
+                  <Label text="Pagina " />
+                        <Button fx:id="btnPaginaPrevia" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#paginaAnterior" HBox.hgrow="NEVER">
+                            <styleClass>
+                                <String fx:value="button-icon" />
+                                <String fx:value="success" />
+                            </styleClass>
+                            <graphic>
+                                <FontIcon iconLiteral="mdal-arrow_left" iconSize="20" />
+                            </graphic>
+                        </Button>
+                  <Label fx:id="labelPage" contentDisplay="CENTER" text="0 de 0" textAlignment="CENTER" />
+                        <Button fx:id="btnPaginaSiguiente" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#paginaSiguiente" HBox.hgrow="NEVER">
+                            <styleClass>
+                                <String fx:value="button-icon" />
+                                <String fx:value="success" />
+                            </styleClass>
+                            <graphic>
+                                <FontIcon iconLiteral="mdal-arrow_right" iconSize="20" />
+                            </graphic>
+                        </Button>
+                    </HBox>
+                </GridPane>
+            <HBox fx:id="hBoxBtnTabla" alignment="CENTER_LEFT" fillHeight="false" spacing="5.0">
+               <children>
+                  <Button fx:id="btnEditar" disable="true" mnemonicParsing="false" onAction="#editarParcialActividad" styleClass="accent" text="Editar">
+                     <graphic>
+                        <FontIcon iconLiteral="mdal-edit" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnEliminar" disable="true" mnemonicParsing="false" onAction="#eliminar" styleClass="accent" text="Eliminar">
+                     <graphic>
+                        <FontIcon iconLiteral="mdal-delete" />
+                     </graphic>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         </VBox>
+   </children>
+</HBox>

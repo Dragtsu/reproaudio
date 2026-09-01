@@ -4,7 +4,7 @@ public enum EnumVistas {
 
     CREAAUDIO("creaAudio.fxml"),
 
-    MENSAJE("mensaje.fxml");
+    REGISTRAACTIVIDAD("parcialActividad.fxml");
 
     public final String location;
 
