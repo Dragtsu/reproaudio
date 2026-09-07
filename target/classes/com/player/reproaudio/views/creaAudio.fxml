@@ -2,68 +2,94 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <HBox xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.player.reproaudio.controller.CreaAudioController">
    <children>
-      <VBox spacing="5.0">
+      <VBox spacing="10.0">
          <children>
-            <Label text="Ingrese el texto:" />
-            <TextArea fx:id="txtTexto" maxHeight="200.0" maxWidth="500.0" />
-            <HBox spacing="5.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="5.0">
                <children>
-                  <Button mnemonicParsing="false">
-                     <graphic>
-                        <FontIcon iconLiteral="mdi2m-motion-play" />
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false">
-                     <graphic>
-                        <FontIcon iconLiteral="mdi2s-skip-forward" />
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false">
-                     <graphic>
-                        <FontIcon iconLiteral="mdi2s-skip-backward" />
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false">
-                     <graphic>
-                        <FontIcon iconLiteral="mdi2s-skip-next-circle" />
-                     </graphic>
-                  </Button>
+                  <Label text="Servidor:" />
+                  <TextField fx:id="txtServidor" minWidth="300.0" text="http://localhost" />
+                  <Label text="Puerto:" />
+                  <TextField fx:id="txtPuerto" prefWidth="50.0" text="8880" />
+                  <Button fx:id="btnTestServer" mnemonicParsing="false" onAction="#verificaStatusServidorKokoro" text="Test" />
                </children>
                <VBox.margin>
-                  <Insets left="10.0" />
+                  <Insets />
                </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </HBox>
-            <HBox alignment="BOTTOM_LEFT" spacing="5.0">
+            <Label text="Ingrese el texto:" />
+            <TextArea fx:id="txtTexto" minHeight="200.0" minWidth="500.0" />
+            <HBox alignment="BOTTOM_LEFT" fillHeight="false" spacing="5.0">
                <children>
                   <Button fx:id="btnGenerar" mnemonicParsing="false" onAction="#generarAudio" styleClass="accent" text="Generar">
                      <graphic>
                         <FontIcon iconLiteral="mdi2h-hammer" />
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="accent" text="Limpiar">
+                  <Button fx:id="btnLimpiar" mnemonicParsing="false" styleClass="accent" text="Limpiar">
                      <graphic>
                         <FontIcon iconLiteral="mdal-cleaning_services" />
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="accent" text="Guardar">
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox fillHeight="false" spacing="5.0">
+               <children>
+                  <Label fx:id="timeLabel" text="00:00" HBox.hgrow="NEVER" />
+                  <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" progress="0.0" HBox.hgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#play">
+                     <graphic>
+                        <FontIcon iconLiteral="mdi2s-skip-next-circle" />
+                     </graphic>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="5.0">
+               <children>
+                  <Label text="Parcial:" />
+                  <ChoiceBox fx:id="cmbParcial" prefWidth="150.0" />
+                  <Label text="Actividad:" />
+                  <ChoiceBox fx:id="cmbActividad" prefWidth="150.0" />
+                  <Button fx:id="btnGuardar" mnemonicParsing="false" styleClass="accent" text="Guardar">
                      <graphic>
                         <FontIcon iconLiteral="mdmz-save" />
                      </graphic>
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </VBox>
 
    </children>

@@ -45,6 +45,7 @@ public final class SingletonViews {
             return;
         }
 
+
         var loader = new FXMLLoader(getClass().getResource(view.location));
         loader.setControllerFactory(context::getBean);
         try {
@@ -78,6 +79,7 @@ public final class SingletonViews {
         AnchorPane.setRightAnchor(views.get(view), 0D);
         AnchorPane.setBottomAnchor(views.get(view), 0D);
         panelCenterPrincipal.getChildren().add(views.get(view));
+        controllers.get(view).init();
     }
 
     private static void limpiarShorcuts() {

@@ -15,9 +15,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import static com.player.reproaudio.utils.Mensaje.mensajeConfirmacion;
@@ -35,7 +39,8 @@ public class ParcialActividadController extends DialogController<ParcialActivida
     @FXML
     TextField txtActividad;
 
-    
+    @FXML
+    TextField txtDirectorio;
 
     private ParcialActividad parcialActividad;
 
@@ -51,7 +56,9 @@ public class ParcialActividadController extends DialogController<ParcialActivida
     @FXML
     TableColumn<ParcialActividad, String> actividadColumn;
 
-    
+    @FXML
+    TableColumn<ParcialActividad, String> directorioColumn;
+
     @FXML
     HBox hBoxBtnTabla;
 
@@ -129,6 +136,7 @@ public class ParcialActividadController extends DialogController<ParcialActivida
         txtIdParcialActividad.setEditable(false);
         txtParcial.setText(parcialActividad.getParcial()+"");
         txtActividad.setText(parcialActividad.getActividad()+"");
+        txtDirectorio.setText(parcialActividad.getDirectorioDestino());
     }
 
     @FXML
@@ -155,6 +163,7 @@ public class ParcialActividadController extends DialogController<ParcialActivida
         txtIdParcialActividad.setText("");
         txtParcial.setText("");
         txtActividad.setText("");
+        txtDirectorio.setText("");
         parcialActividad = null;
 
         if (modoBusqueda.isSelected())
@@ -170,13 +179,19 @@ public class ParcialActividadController extends DialogController<ParcialActivida
 
         parcialActividad = new ParcialActividad();
 
-        parcialActividad.setParcial(Integer.parseInt(txtParcial.getText()));
-        parcialActividad.setActividad(Integer.parseInt(txtActividad.getText()));
+        try{
+            parcialActividad.setParcial(Integer.parseInt(txtParcial.getText()));
+            parcialActividad.setActividad(Integer.parseInt(txtActividad.getText()));
+        } catch (Exception e) {
+            return;  // Pendiente comprobación de tipos
+        }
+
+        parcialActividad.setDirectorioDestino(txtDirectorio.getText());
 
         if (txtIdParcialActividad.getText() != null && !txtIdParcialActividad.getText().trim().isEmpty()) {
             parcialActividad.setId(Integer.parseInt(txtIdParcialActividad.getText()));
         }
-
+        log.info("ID de parcial ACtividad: "+ txtIdParcialActividad.getText());
         String[] result = guardarParcialActividad(parcialActividad);
 
         if (result[0].equals("OK")) {
@@ -188,12 +203,37 @@ public class ParcialActividadController extends DialogController<ParcialActivida
             Mensaje.mensaje(result[1], Alert.AlertType.ERROR);
     }
 
+    public void selectFolder() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Seleccionar Carpeta Destino");
+
+        // Set initial directory to last selected or user home
+        String lastPath = txtDirectorio.getText();
+        if (!lastPath.isEmpty()) {
+            File lastDir = new File(lastPath);
+            if (lastDir.exists() && lastDir.isDirectory()) {
+                directoryChooser.setInitialDirectory(lastDir);
+            }
+        } else {
+            directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        }
+
+        Stage stage = (Stage) txtDirectorio.getScene().getWindow();
+
+        File selectedDirectory = directoryChooser.showDialog(stage);
+
+        if (selectedDirectory != null) {
+            txtDirectorio.setText(selectedDirectory.getAbsolutePath());
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         idColumn.setCellValueFactory(new PropertyValueFactory<ParcialActividad, String>("id"));
         parcialColumn.setCellValueFactory(new PropertyValueFactory<ParcialActividad, String>("parcial"));
         actividadColumn.setCellValueFactory(new PropertyValueFactory<ParcialActividad, String>("actividad"));
+        directorioColumn.setCellValueFactory(new PropertyValueFactory<ParcialActividad, String>("directorioDestino"));
 
         resetLayout();
 
@@ -249,5 +289,10 @@ public class ParcialActividadController extends DialogController<ParcialActivida
 
     @Override
     public void resetLayout() {       
+    }
+
+    @Override
+    public void init() {
+
     }
 }

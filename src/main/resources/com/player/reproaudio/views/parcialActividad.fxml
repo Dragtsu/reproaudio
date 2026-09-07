@@ -19,7 +19,7 @@
    <children>
       <VBox spacing="10.0">
          <children>
-            <VBox spacing="5.0">
+            <VBox spacing="10.0">
                <children>
                   <Label text="Id:" />
                   <TextField fx:id="txtIdParcialActividad" editable="false" />
@@ -27,28 +27,39 @@
                   <TextField fx:id="txtParcial" />
                   <Label text="Actividad:" />
                   <TextField fx:id="txtActividad" />
+                  <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label contentDisplay="CENTER" text="Carpeta audio:" />
+                        <TextField fx:id="txtDirectorio" minWidth="200.0" />
+                        <Button fx:id="btnFolderDestino" mnemonicParsing="false" onAction="#selectFolder">
+                           <graphic>
+                              <FontIcon iconLiteral="mdi2f-folder-cog-outline" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" spacing="5.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#guardar" styleClass="accent" text="Guardar">
+                           <graphic>
+                              <FontIcon iconLiteral="mdmz-save" />
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#limpiar" styleClass="accent" text="Limpiar">
+                           <graphic>
+                              <FontIcon iconLiteral="mdal-cleaning_services" />
+                           </graphic>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" top="5.0" />
                </padding>
             </VBox>
-            <HBox alignment="BOTTOM_LEFT" spacing="5.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#guardar" styleClass="accent" text="Guardar">
-                     <graphic>
-                        <FontIcon iconLiteral="mdmz-save" />
-                     </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#limpiar" styleClass="accent" text="Limpiar">
-                     <graphic>
-                        <FontIcon iconLiteral="mdal-cleaning_services" />
-                     </graphic>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
          </children>
       </VBox>
       <VBox fx:id="vBoxContainer" minWidth="700.0" spacing="5.0" HBox.hgrow="ALWAYS">
@@ -71,6 +82,7 @@
                   <TableColumn fx:id="idColumn" editable="false" maxWidth="-1.0" minWidth="40.0" prefWidth="-1.0" sortable="false" text="Id " />
                   <TableColumn fx:id="parcialColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="-1.0" sortable="false" text="Parcial" />
                   <TableColumn fx:id="actividadColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" sortable="false" text="Actividad" />
+                  <TableColumn fx:id="directorioColumn" editable="false" prefWidth="75.0" sortable="false" text="Directorio" />
                  </columns>
                <styleClass>
                   <String fx:value="striped" />
