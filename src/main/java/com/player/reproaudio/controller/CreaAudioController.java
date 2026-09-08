@@ -195,15 +195,12 @@ public class CreaAudioController implements CommonController {
                     }
                 }
         );
-
-        resetColorButton();
-
-
     }
 
     @Override
     public void init() {
         configurarListenerAudioCargado();
+        resetColorButton(false);
     }
 
     @FXML
@@ -324,18 +321,17 @@ public class CreaAudioController implements CommonController {
         log.info("Listener configurado..");
 
         isAudioLoaded.addListener((observable, oldValue, newValue) -> {
-
             log.info("AudioLoaded Cambió de " + oldValue + " a " + newValue);
-
-            if (newValue) {
-                btnPlay.getStyleClass().add(SUCCESS);
-            } else {
-                btnPlay.getStyleClass().remove(ACCENT);
-            }
+            resetColorButton (newValue);
         });
     }
 
-    private void resetColorButton() {
+    private void resetColorButton(boolean btnState) {
+
+        if (btnState)
+            btnPlay.getStyleClass().add(SUCCESS);
+         else
+            btnPlay.getStyleClass().remove(ACCENT);
 
             /*
             btnPlay.getStyleClass().add(Styles.BUTTON_ICON);
