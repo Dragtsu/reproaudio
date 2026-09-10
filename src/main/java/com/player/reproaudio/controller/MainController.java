@@ -29,8 +29,12 @@ public class MainController {
     }
     
     @FXML
+    public void crearParcial(){
+        mostrarVistaPanelPrincipal(EnumVistas.REGISTRAPARCIAL);
+    }
+
+    @FXML
     public void crearActividad(){
-        System.out.println("CARGAR VISTA ACTIVIDAD");
         mostrarVistaPanelPrincipal(EnumVistas.REGISTRAACTIVIDAD);
     }
 

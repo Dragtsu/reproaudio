@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -15,22 +16,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<HBox xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.player.reproaudio.controller.ParcialActividadController">
+<HBox xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.player.reproaudio.controller.ParcialController">
    <children>
       <VBox spacing="10.0">
          <children>
             <VBox spacing="10.0">
                <children>
-                  <Label text="Id:" />
-                  <TextField fx:id="txtIdParcialActividad" editable="false" />
                   <Label text="Parcial:" />
                   <TextField fx:id="txtParcial" />
-                  <Label text="Actividad:" />
-                  <TextField fx:id="txtActividad" />
+                  <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+                     <children>
+                        <CheckBox fx:id="chkGenerarDirectorio" mnemonicParsing="false" selected="true" text="Generar directorio" />
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label contentDisplay="CENTER" text="Carpeta audio:" />
-                        <TextField fx:id="txtDirectorio" minWidth="200.0" />
+                        <TextField fx:id="txtDirectorio" minWidth="300.0" />
                         <Button fx:id="btnFolderDestino" mnemonicParsing="false" onAction="#selectFolder">
                            <graphic>
                               <FontIcon iconLiteral="mdi2f-folder-cog-outline" />
@@ -77,12 +79,10 @@
                   <Insets right="5.0" />
                </padding>
                </HBox>
-               <TableView fx:id="tablaParcialActividad" VBox.vgrow="ALWAYS">
+               <TableView fx:id="tablaParcial" VBox.vgrow="ALWAYS">
                  <columns>
-                  <TableColumn fx:id="idColumn" editable="false" maxWidth="-1.0" minWidth="40.0" prefWidth="-1.0" sortable="false" text="Id " />
                   <TableColumn fx:id="parcialColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="-1.0" sortable="false" text="Parcial" />
-                  <TableColumn fx:id="actividadColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" sortable="false" text="Actividad" />
-                  <TableColumn fx:id="directorioColumn" editable="false" prefWidth="75.0" sortable="false" text="Directorio" />
+                  <TableColumn fx:id="directorioColumn" editable="false" maxWidth="-1.0" minWidth="300.0" prefWidth="-1.0" sortable="false" text="Directorio" />
                  </columns>
                <styleClass>
                   <String fx:value="striped" />

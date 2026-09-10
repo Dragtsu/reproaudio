@@ -3,8 +3,8 @@ package com.player.reproaudio.utils;
 public enum EnumVistas {
 
     CREAAUDIO("creaAudio.fxml"),
-
-    REGISTRAACTIVIDAD("parcialActividad.fxml");
+    REGISTRAPARCIAL("parcial.fxml"),
+    REGISTRAACTIVIDAD("actividad.fxml");
 
     public final String location;
 

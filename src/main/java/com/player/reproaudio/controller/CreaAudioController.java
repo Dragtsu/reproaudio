@@ -1,9 +1,8 @@
 package com.player.reproaudio.controller;
 
 
-import atlantafx.base.theme.Styles;
-import com.player.reproaudio.entity.ParcialActividad;
-import com.player.reproaudio.repository.ParcialActividadRepository;
+import com.player.reproaudio.entity.Parcial;
+import com.player.reproaudio.repository.ParcialRepository;
 import com.player.reproaudio.utils.audio.GeneracionAudio;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
@@ -17,7 +16,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.kordamp.ikonli.javafx.FontIcon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +56,8 @@ public class CreaAudioController implements CommonController {
 
 
     @Autowired
-    private ParcialActividadRepository parcialActividadRepository;
-    private ObservableList<ParcialActividad> listaParcial = FXCollections.observableArrayList();
+    private ParcialRepository parcialRepository;
+    private ObservableList<Parcial> listaParcial = FXCollections.observableArrayList();
     private Map<Integer, List<Integer>> mapaActividadesPorParcial = new HashMap<>();
     @FXML
     private ChoiceBox<Integer> cmbParcial;
@@ -164,43 +162,40 @@ public class CreaAudioController implements CommonController {
     @Override
     public void resetLayout() {
 
-        listaParcial.setAll(FXCollections.observableList(parcialActividadRepository.findAll()));
-        Set<Integer> parcialesSet = listaParcial.stream()
-                .map(ParcialActividad::getParcial)
-                .collect(Collectors.toSet());
-        ObservableList<Integer> listaParciales = FXCollections.observableArrayList(parcialesSet);
-        cmbParcial.setItems(listaParciales);
+        log.info("Reset Layout");
 
-        mapaActividadesPorParcial = listaParcial.stream()
-                .collect(Collectors.groupingBy(
-                        ParcialActividad::getParcial,
-                        Collectors.mapping(ParcialActividad::getActividad, Collectors.toList())
-                ));
 
-        cmbParcial.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        // Extraer el número del parcial del String "Parcial 1"
-                        // int numeroParcial = Integer.parseInt(newValue.replaceAll("\\D+", ""));
-
-                        // Obtener actividades del mapa
-                        List<Integer> actividades = mapaActividadesPorParcial.getOrDefault(newValue, new ArrayList<>());
-
-                        // CORRECCIÓN: Convertir a ObservableList
-                        ObservableList<Integer> listaActividades = FXCollections.observableArrayList(actividades);
-
-                        // ASIGNAR al ChoiceBox de actividades
-                        cmbActividad.setItems(listaActividades);
-                        cmbActividad.getSelectionModel().clearSelection();
-                    }
-                }
-        );
     }
 
     @Override
     public void init() {
         configurarListenerAudioCargado();
+        configurarListenerComboActividadParcial();
         resetColorButton(false);
+    }
+
+    private void configurarListenerComboActividadParcial() {
+
+        listaParcial.setAll(FXCollections.observableList(parcialRepository.findAll()));
+        Set<Integer> parcialesSet = listaParcial.stream()
+                .map(Parcial::getParcial)
+                .collect(Collectors.toSet());
+        ObservableList<Integer> listaParciales = FXCollections.observableArrayList(parcialesSet);
+        cmbParcial.setItems(listaParciales);
+
+
+
+        cmbParcial.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+
+                        List<Integer> actividades = mapaActividadesPorParcial.getOrDefault(newValue, new ArrayList<>());
+                        ObservableList<Integer> listaActividades = FXCollections.observableArrayList(actividades);
+                        cmbActividad.setItems(listaActividades);
+                        cmbActividad.getSelectionModel().clearSelection();
+                    }
+                }
+        );
     }
 
     @FXML

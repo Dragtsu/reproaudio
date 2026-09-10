@@ -3,14 +3,13 @@ package com.player.reproaudio.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.io.Serializable;
 
-import lombok.Data;
-
 @Data
 @Entity
-public class ParcialActividad implements Serializable {
+public class Actividad implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "parcial_actividad_seq")

@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,29 +16,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<HBox xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.player.reproaudio.controller.ParcialActividadController">
+<HBox xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.player.reproaudio.controller.ActividadController">
    <children>
       <VBox spacing="10.0">
          <children>
             <VBox spacing="10.0">
                <children>
-                  <Label text="Id:" />
-                  <TextField fx:id="txtIdParcialActividad" editable="false" />
                   <Label text="Parcial:" />
-                  <TextField fx:id="txtParcial" />
+                  <ChoiceBox fx:id="lstParcial" minWidth="300.0" />
                   <Label text="Actividad:" />
                   <TextField fx:id="txtActividad" />
-                  <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Label contentDisplay="CENTER" text="Carpeta audio:" />
-                        <TextField fx:id="txtDirectorio" minWidth="200.0" />
-                        <Button fx:id="btnFolderDestino" mnemonicParsing="false" onAction="#selectFolder">
-                           <graphic>
-                              <FontIcon iconLiteral="mdi2f-folder-cog-outline" />
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS" />
+                  <Label text="Nombre/descripción:" />
+                  <TextField fx:id="txtNombre" />
+                  <Label text="Texto del audio:" />
+                  <TextArea fx:id="txtTexto" prefHeight="200.0" prefWidth="300.0" />
                   <HBox alignment="BOTTOM_LEFT" spacing="5.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#guardar" styleClass="accent" text="Guardar">
@@ -77,12 +70,12 @@
                   <Insets right="5.0" />
                </padding>
                </HBox>
-               <TableView fx:id="tablaParcialActividad" VBox.vgrow="ALWAYS">
+               <TableView fx:id="tablaActividad" VBox.vgrow="ALWAYS">
                  <columns>
-                  <TableColumn fx:id="idColumn" editable="false" maxWidth="-1.0" minWidth="40.0" prefWidth="-1.0" sortable="false" text="Id " />
-                  <TableColumn fx:id="parcialColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="-1.0" sortable="false" text="Parcial" />
-                  <TableColumn fx:id="actividadColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" sortable="false" text="Actividad" />
-                  <TableColumn fx:id="directorioColumn" editable="false" prefWidth="75.0" sortable="false" text="Directorio" />
+                  <TableColumn fx:id="parcialColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" sortable="false" text="Parcial" />
+                  <TableColumn fx:id="actividadColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" sortable="false" text="Actividad" />
+                  <TableColumn fx:id="nombreColumn" editable="false" minWidth="100.0" prefWidth="75.0" sortable="false" text="Nombre" />
+                  <TableColumn fx:id="textoColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Texto" />
                  </columns>
                <styleClass>
                   <String fx:value="striped" />

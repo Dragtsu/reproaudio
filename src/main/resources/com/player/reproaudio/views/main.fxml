@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<BorderPane styleClass="aero-window" stylesheets="@aero-styles.css,@office2010.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.player.reproaudio.controller.MainController">
+<BorderPane styleClass="aero-window" stylesheets="@aero-styles.css,@office2010.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.player.reproaudio.controller.MainController">
    <top>
       <VBox>
          <children>
@@ -48,7 +47,7 @@
                 <Tab text="Audio">
                         <HBox spacing="4.0" styleClass="ribbon-group,ribbon-content">
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="btnCrearAudio" mnemonicParsing="false" styleClass="ribbon-button-large" onAction="#mostrarCrearAudio" text="Generar" />
+                              <Button fx:id="btnCrearAudio" mnemonicParsing="false" onAction="#mostrarCrearAudio" styleClass="ribbon-button-large" text="Generar" />
                               <Separator orientation="VERTICAL" />
                               <Button fx:id="btnVenta3" mnemonicParsing="false" styleClass="ribbon-button-large" text="Produccion" />
                               <Separator orientation="VERTICAL" />
@@ -60,7 +59,9 @@
                         <HBox spacing="4.0" styleClass="ribbon-group,ribbon-content">
                            <children>
                               <Separator orientation="VERTICAL" />
-                              <Button mnemonicParsing="false" styleClass="ribbon-button-large" onAction="#crearActividad" text="Actividad" />
+                              <Button mnemonicParsing="false" onAction="#crearParcial" styleClass="ribbon-button-large" text="Parcial" />
+                              <Separator orientation="VERTICAL" />
+                              <Button mnemonicParsing="false" onAction="#crearActividad" styleClass="ribbon-button-large" text="Actividad" />
                               <Separator orientation="VERTICAL" />                          
                            </children>
                            <padding>
