@@ -11,15 +11,26 @@ import java.io.Serializable;
 @Entity
 public class Actividad implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "parcial_actividad_seq")
-    @SequenceGenerator(name = "parcial_actividad_seq", sequenceName = "parcial_actividad_seq", allocationSize = 1)
-    private int id;
 
-    @NotNull(message= "El \"Parcial\"  es requerido")
-    private int parcial;
+    @EmbeddedId
+    private ParcialActividadId parcialActividadId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("parcial_id")      // <-- sincroniza id.parcialId con Parcial.id
+    @JoinColumn(name = "parcial_id")
+    private Parcial parcial;
+
+
+
+
+
+    @ManyToOne(fetch = FetchType.EAGER) // EAGER es por default
+    @JoinColumn(name = "parcial_id", referencedColumnName = "parcial")
+    private Parcial parcial;
+
     @NotNull(message = "El \"Número de actividad\" es requerida")
     private int actividad;
+
     @NotBlank(message = "Es necesario indiciar el directorio en donde se guardarán los audios")
     private String directorioDestino;
 

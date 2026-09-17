@@ -72,10 +72,10 @@
                </HBox>
                <TableView fx:id="tablaActividad" VBox.vgrow="ALWAYS">
                  <columns>
-                  <TableColumn fx:id="parcialColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" sortable="false" text="Parcial" />
-                  <TableColumn fx:id="actividadColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" sortable="false" text="Actividad" />
-                  <TableColumn fx:id="nombreColumn" editable="false" minWidth="100.0" prefWidth="75.0" sortable="false" text="Nombre" />
-                  <TableColumn fx:id="textoColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Texto" />
+                  <TableColumn fx:id="parcialColumn" editable="false" maxWidth="-1.0" minWidth="70.0" prefWidth="-1.0" sortable="false" text="Parcial" />
+                  <TableColumn fx:id="actividadColumn" editable="false" maxWidth="-1.0" minWidth="70.0" prefWidth="-1.0" sortable="false" text="Actividad" />
+                  <TableColumn fx:id="nombreColumn" editable="false" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0" sortable="false" text="Nombre" />
+                  <TableColumn fx:id="textoColumn" maxWidth="-1.0" minWidth="250.0" prefWidth="-1.0" text="Texto" />
                  </columns>
                <styleClass>
                   <String fx:value="striped" />

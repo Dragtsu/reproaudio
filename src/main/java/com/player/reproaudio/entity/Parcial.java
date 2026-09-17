@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 
@@ -18,6 +20,9 @@ public class Parcial implements Serializable {
 
     @NotBlank(message = "Es necesario indiciar el directorio en donde se guardarán los audios")
     private String directorioDestino;
+
+    @OneToMany(mappedBy = "parcial", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Actividad> actividades = new ArrayList<>();
 
     @Override
     public String toString() {
