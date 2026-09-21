@@ -25,12 +25,12 @@
                   <Label text="Parcial:" />
                   <ChoiceBox fx:id="lstParcial" minWidth="300.0" />
                   <Label text="Actividad:" />
-                  <TextField fx:id="txtActividad" />
+                  <TextField fx:id="txtActividad" editable="false" />
                   <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS" />
                   <Label text="Nombre/descripción:" />
                   <TextField fx:id="txtNombre" />
                   <Label text="Texto del audio:" />
-                  <TextArea fx:id="txtTexto" prefHeight="200.0" prefWidth="300.0" />
+                  <TextArea fx:id="txtAudio" prefHeight="200.0" prefWidth="200.0" />
                   <HBox alignment="BOTTOM_LEFT" spacing="5.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#guardar" styleClass="accent" text="Guardar">
@@ -121,7 +121,7 @@
                 </GridPane>
             <HBox fx:id="hBoxBtnTabla" alignment="CENTER_LEFT" fillHeight="false" spacing="5.0">
                <children>
-                  <Button fx:id="btnEditar" disable="true" mnemonicParsing="false" onAction="#editarParcialActividad" styleClass="accent" text="Editar">
+                  <Button fx:id="btnEditar" disable="true" mnemonicParsing="false" styleClass="accent" text="Editar">
                      <graphic>
                         <FontIcon iconLiteral="mdal-edit" />
                      </graphic>

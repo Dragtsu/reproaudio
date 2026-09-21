@@ -2,7 +2,9 @@ package com.player.reproaudio.controller;
 
 
 import atlantafx.base.controls.ToggleSwitch;
+import com.player.reproaudio.entity.Actividad;
 import com.player.reproaudio.entity.Parcial;
+import com.player.reproaudio.repository.ActividadRepository;
 import com.player.reproaudio.repository.ParcialRepository;
 import com.player.reproaudio.utils.EntityValidator;
 import com.player.reproaudio.utils.Mensaje;
@@ -23,41 +25,44 @@ import org.springframework.stereotype.Controller;
 
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import static com.player.reproaudio.utils.Mensaje.mensajeConfirmacion;
 
 @Slf4j
 @Controller
-public class ActividadController extends DialogController<Parcial> implements Initializable ,CommonController {
+public class ActividadController extends DialogController<Actividad> implements Initializable ,CommonController {
 
     @FXML
-    TextField txtIdParcialActividad;
-
-    @FXML
-    TextField txtParcial;
+    ChoiceBox<Parcial> lstParcial;
 
     @FXML
     TextField txtActividad;
 
     @FXML
-    TextField txtDirectorio;
-
-    private Parcial parcial;
+    TextField txtNombre;
 
     @FXML
-    TableView<Parcial> tablaParcialActividad;
+    TextArea txtAudio;
+
+
+
+    private Actividad actividad;
 
     @FXML
-    TableColumn<Parcial, String> idColumn;
+    TableView<Actividad> tablaActividad;
 
     @FXML
-    TableColumn<Parcial, String> parcialColumn;
+    TableColumn<Actividad, String> nombreColumn;
 
     @FXML
-    TableColumn<Parcial, String> actividadColumn;
+    TableColumn<Actividad, String> parcialColumn;
 
     @FXML
-    TableColumn<Parcial, String> directorioColumn;
+    TableColumn<Actividad, String> actividadColumn;
+
+    @FXML
+    TableColumn<Actividad, String> textoColumn;
 
     @FXML
     HBox hBoxBtnTabla;
@@ -69,6 +74,9 @@ public class ActividadController extends DialogController<Parcial> implements In
     Button btnEliminar;
 
     ToggleSwitch modoBusqueda;
+
+    @Autowired
+    private ActividadRepository actividadRepository;
 
     @Autowired
     private ParcialRepository parcialRepository;
@@ -94,7 +102,7 @@ public class ActividadController extends DialogController<Parcial> implements In
     }
 
     private void contarRegistros() {
-     //   totalRegistros = (int) parcialRepository.countLike(txtIdParcialActividad.getText() + "%", txtParcial.getText() + "%", txtActividad.getText() + "%");
+     //   totalRegistros = (int) parcialRepository.countLike(txtIdActividad.getText() + "%", txtParcial.getText() + "%", txtActividad.getText() + "%");
     }
 
     public void cambiarPagina() {
@@ -113,45 +121,44 @@ public class ActividadController extends DialogController<Parcial> implements In
     public void reloadTabla() {
 
         setPaginaParameters();
-    //    page = parcialRepository.finAllByLike(txtIdParcialActividad.getText() + "%", txtParcial.getText() + "%", txtActividad.getText() + "%", pagina);
+    //    page = parcialRepository.finAllByLike(txtIdActividad.getText() + "%", txtParcial.getText() + "%", txtActividad.getText() + "%", pagina);
         actualizarTabla();
     }
 
 
-    private String[] guardarParcialActividad(Parcial Parcial) {
+    private String[] guardarActividad(Actividad actividad) {
 
-        String[] validar = new EntityValidator().validateEntity(Parcial);
+        String[] validar = new EntityValidator().validateEntity(actividad);
 
         if (validar[0].equals("OK"))
-            parcialRepository.save(Parcial);
+            actividadRepository.save(actividad);
 
         return validar;
     }
 
     @FXML
-    public void editarParcialActividad() {
+    public void editarActividad() {
 
-        parcial = tablaParcialActividad.getSelectionModel().getSelectedItem();
-       // txtIdParcialActividad.setText(parcial.getId() + "");
-        txtIdParcialActividad.setEditable(false);
-        txtParcial.setText(parcial.getParcial()+"");
+        actividad = tablaActividad.getSelectionModel().getSelectedItem();
+       // txtIdActividad.setText(parcial.getId() + "");
+        txtActividad.setEditable(false);
+
        // txtActividad.setText(parcial.getActividad()+"");
-        txtDirectorio.setText(parcial.getDirectorioDestino());
     }
 
     @FXML
     public void eliminar() {
 
-        int i = tablaParcialActividad.getSelectionModel().getSelectedIndex();
+        int i = tablaActividad.getSelectionModel().getSelectedIndex();
 
         if (i < 0)
             return;
 
-        Parcial Parcial = tablaParcialActividad.getSelectionModel().getSelectedItem();
+        Actividad actividad = tablaActividad.getSelectionModel().getSelectedItem();
 
         if (mensajeConfirmacion(Mensaje.ELIMINAR_MSJ)) {
 
-            parcialRepository.delete(Parcial);
+            actividadRepository.delete(actividad);
             limpiar();
             actualizarChoiceBoxAndTabla();
         }
@@ -160,80 +167,51 @@ public class ActividadController extends DialogController<Parcial> implements In
     @FXML
     public void limpiar() {
 
-        txtIdParcialActividad.setText("");
-        txtParcial.setText("");
         txtActividad.setText("");
-        txtDirectorio.setText("");
-        parcial = null;
+
+        actividad = null;
 
         if (modoBusqueda.isSelected())
-            txtIdParcialActividad.setEditable(true);
+            txtActividad.setEditable(true);
         actualizarChoiceBoxAndTabla();
-        txtParcial.requestFocus();
-        tablaParcialActividad.getSelectionModel().clearSelection();
+        txtActividad.requestFocus();
+        tablaActividad.getSelectionModel().clearSelection();
 
     }
 
     @FXML
     public void guardar() {
 
-        parcial = new Parcial();
+        actividad = new Actividad();
 
         try{
-            parcial.setParcial(Integer.parseInt(txtParcial.getText()));
+            //actividad.setActividad(Integer.parseInt(txtActividad.getText()));
             //parcial.setActividad(Integer.parseInt(txtActividad.getText()));
         } catch (Exception e) {
             return;  // Pendiente comprobación de tipos
         }
 
-        parcial.setDirectorioDestino(txtDirectorio.getText());
 
-        if (txtIdParcialActividad.getText() != null && !txtIdParcialActividad.getText().trim().isEmpty()) {
-         //   parcial.setId(Integer.parseInt(txtIdParcialActividad.getText()));
-        }
-        log.info("ID de parcial ACtividad: "+ txtIdParcialActividad.getText());
-        String[] result = guardarParcialActividad(parcial);
+
+        String[] result = guardarActividad(actividad);
 
         if (result[0].equals("OK")) {
             Mensaje.mensaje(result[1], Alert.AlertType.INFORMATION);
             actualizarChoiceBoxAndTabla();
             limpiar();
-            txtParcial.requestFocus();
+            txtActividad.requestFocus();
         } else
             Mensaje.mensaje(result[1], Alert.AlertType.ERROR);
     }
 
-    public void selectFolder() {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Seleccionar Carpeta Destino");
-
-        // Set initial directory to last selected or user home
-        String lastPath = txtDirectorio.getText();
-        if (!lastPath.isEmpty()) {
-            File lastDir = new File(lastPath);
-            if (lastDir.exists() && lastDir.isDirectory()) {
-                directoryChooser.setInitialDirectory(lastDir);
-            }
-        } else {
-            directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        }
-
-        Stage stage = (Stage) txtDirectorio.getScene().getWindow();
-
-        File selectedDirectory = directoryChooser.showDialog(stage);
-
-        if (selectedDirectory != null) {
-            txtDirectorio.setText(selectedDirectory.getAbsolutePath());
-        }
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Parcial, String>("id"));
-        parcialColumn.setCellValueFactory(new PropertyValueFactory<Parcial, String>("parcial"));
-        actividadColumn.setCellValueFactory(new PropertyValueFactory<Parcial, String>("actividad"));
-        directorioColumn.setCellValueFactory(new PropertyValueFactory<Parcial, String>("directorioDestino"));
+        actividadColumn.setCellValueFactory(new PropertyValueFactory<Actividad, String>("actividad"));
+        parcialColumn.setCellValueFactory(new PropertyValueFactory<Actividad, String>("parcial"));
+        nombreColumn.setCellValueFactory(new PropertyValueFactory<Actividad, String>("nombre"));
+        textoColumn.setCellValueFactory(new PropertyValueFactory<Actividad, String>("texto"));
 
         resetLayout();
 
@@ -253,9 +231,9 @@ public class ActividadController extends DialogController<Parcial> implements In
                 }
         );
 
-        tablaParcialActividad.setItems(tableViewObservableList);
+        tablaActividad.setItems(tableViewObservableList);
         choiceNumRegistros.setItems(choiceObservableList);
-        tablaParcialActividad.setStyle(style);
+        tablaActividad.setStyle(style);
         actualizarChoiceBoxAndTabla();
 
         modoBusqueda = new ToggleSwitch("Modo búsqueda");
@@ -263,15 +241,12 @@ public class ActividadController extends DialogController<Parcial> implements In
         modoBusqueda.selectedProperty().addListener((obs, old, val) -> {
 
             if (val) {
-                txtIdParcialActividad.setOnKeyReleased(habilitarBusquedaEvent);
-                txtParcial.setOnKeyReleased(habilitarBusquedaEvent);
                 txtActividad.setOnKeyReleased(habilitarBusquedaEvent);
 
+
             } else {
-                txtIdParcialActividad.setText("");
-                txtIdParcialActividad.setOnKeyReleased(null);
-                txtIdParcialActividad.setEditable(false);
-                txtParcial.setOnKeyReleased(null);
+                txtActividad.setText("");
+
                 txtActividad.setOnKeyReleased(null);
             }
 
@@ -279,16 +254,32 @@ public class ActividadController extends DialogController<Parcial> implements In
         });
 
         hBoxBtnTabla.getChildren().add(modoBusqueda);
-        tablaParcialActividad.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        tablaActividad.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 
             btnEditar.setDisable(newSelection == null);
             btnEliminar.setDisable(newSelection == null);
 
         });
+
+        recargaParciales();
+    }
+
+    public void recargaParciales() {
+        Parcial seleccionado = lstParcial.getSelectionModel().getSelectedItem(); // guardar selección actual
+
+        List<Parcial> parciales = parcialRepository.findAll();
+        lstParcial.getItems().setAll(parciales);
+
+        // Restaurar selección si todavía existe
+        if (seleccionado != null && parciales.contains(seleccionado)) {
+            lstParcial.getSelectionModel().select(seleccionado);
+        }
     }
 
     @Override
     public void resetLayout() {
+
+        recargaParciales();
     }
 
     @Override

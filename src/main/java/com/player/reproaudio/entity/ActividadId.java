@@ -9,14 +9,14 @@ import java.util.Objects;
 
 @Embeddable
 @Data
-public class ParcialActividadId implements Serializable {
+public class ActividadId implements Serializable {
 
     private int parcial_id;
     private int actividad_id;
 
-    public ParcialActividadId() {}
+    public ActividadId() {}
 
-    public ParcialActividadId(int parcial_id, int actividad_id) {
+    public ActividadId(int parcial_id, int actividad_id) {
         this.parcial_id = parcial_id;
         this.actividad_id = actividad_id;
     }
@@ -24,8 +24,8 @@ public class ParcialActividadId implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ParcialActividadId)) return false;
-        ParcialActividadId that = (ParcialActividadId) o;
+        if (!(o instanceof ActividadId)) return false;
+        ActividadId that = (ActividadId) o;
         return Objects.equals(parcial_id, that.parcial_id) && Objects.equals(actividad_id, that.actividad_id);
     }
 
