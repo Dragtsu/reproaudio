@@ -3,6 +3,7 @@ package com.player.reproaudio.controller;
 
 import atlantafx.base.controls.ToggleSwitch;
 import com.player.reproaudio.entity.Actividad;
+import com.player.reproaudio.entity.ActividadId;
 import com.player.reproaudio.entity.Parcial;
 import com.player.reproaudio.repository.ActividadRepository;
 import com.player.reproaudio.repository.ParcialRepository;
@@ -44,8 +45,6 @@ public class ActividadController extends DialogController<Actividad> implements 
 
     @FXML
     TextArea txtAudio;
-
-
 
     private Actividad actividad;
 
@@ -186,6 +185,11 @@ public class ActividadController extends DialogController<Actividad> implements 
 
         try{
             //actividad.setActividad(Integer.parseInt(txtActividad.getText()));
+            actividad.setActividadId(new ActividadId(lstParcial.getSelectionModel().getSelectedItem().getParcial(), Integer.parseInt(txtActividad.getText()) ));
+            actividad.setNombre(txtNombre.getText().trim());
+            actividad.setTexto(txtAudio.getText().trim());
+            actividad.setParcial(lstParcial.getSelectionModel().getSelectedItem());
+            
             //parcial.setActividad(Integer.parseInt(txtActividad.getText()));
         } catch (Exception e) {
             return;  // Pendiente comprobación de tipos
@@ -260,11 +264,24 @@ public class ActividadController extends DialogController<Actividad> implements 
             btnEliminar.setDisable(newSelection == null);
 
         });
+        
+        lstParcial.getSelectionModel().selectedItemProperty().addListener((obs,OldSelection, newSelection)->{
+            
+            int seleccionado = 0;
+            
+            if( (seleccionado = lstParcial.getSelectionModel().getSelectedIndex() ) >= 0 )
+                txtActividad.setText( numeroActividadSiguiente(seleccionado)+"" );       
+        });
 
         recargaParciales();
+        
+        
+        
+        
     }
 
     public void recargaParciales() {
+        
         Parcial seleccionado = lstParcial.getSelectionModel().getSelectedItem(); // guardar selección actual
 
         List<Parcial> parciales = parcialRepository.findAll();
@@ -274,6 +291,15 @@ public class ActividadController extends DialogController<Actividad> implements 
         if (seleccionado != null && parciales.contains(seleccionado)) {
             lstParcial.getSelectionModel().select(seleccionado);
         }
+        
+        if( !parciales.isEmpty() && seleccionado == null ){            
+            lstParcial.getSelectionModel().selectFirst();
+        }
+    }
+    
+    private int numeroActividadSiguiente(int parcial){
+        
+        return actividadRepository.findMaxNumeroByParcial(parcial)+1;
     }
 
     @Override
